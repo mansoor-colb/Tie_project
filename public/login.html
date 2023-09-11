@@ -48,13 +48,16 @@
         
                                 <div class="mt-5 mb-5 login-input" >
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="artistid" placeholder="artist Name" required>
+                                        <input type="email" class="form-control" id="artistid" placeholder="Artist email id" required>
                                     </div>
                                     <div class="form-group">
                                         <input type="password" id="pass" class="form-control" placeholder="Password">
                                     </div>
+                                   
                                     <button id="signup" class="btn login-form__btn submit w-100">Sign In</button>
                                 </div>
+                                <p class="mt-5 login-form__footer">Don't have Account ?? <a href="register.html" class="text-primary"> Register </a> </p>
+                              
                             </div>
                         </div>
                     </div>
@@ -73,7 +76,7 @@
                 let pass=$("#pass").val()
                 if(artist!=''  && pass!=''){
                     $.ajax({
-                                url:"http://localhost:1223/signup",
+                                url:"http://localhost:1233/signin",
                                 type:"post",
                                 dataType: "json",
                                 data: { Artist:artist,Pass:pass
@@ -82,7 +85,8 @@
                                     console.log(res.response)
                                     if(res.status==200){
                                         swal("Logged In Successfully")
-                                        localStorage.setItem('artistid',res.response[0].CID)
+                                        console.log(res.response)
+                                        localStorage.setItem('artistid',res.response[0].aid)
                                         setTimeout(function(){
                                             window.location.href='index.html'
 
@@ -91,9 +95,10 @@
                                     }
                                     else if(res.status==500){
                                         swal("Error...", "Please Enter Valid Credentials !!", "error");
+                                        console.log(res.response)
 
                                     }
-                                    else{
+                                    else if(res.status==700){
                                         alert("No user exist")
                                     }
 

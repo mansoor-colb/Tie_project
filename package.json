@@ -15,5 +15,14 @@
   "bugs": {
     "url": "https://github.com/mansoor-colb/tie_project/issues"
   },
-  "homepage": "https://github.com/mansoor-colb/tie_project#readme"
+  "homepage": "https://github.com/mansoor-colb/tie_project#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "crypto": "^1.0.1",
+    "express": "^4.18.2",
+    "multer": "^1.4.5-lts.1",
+    "mysql": "^2.18.1",
+    "nodemailer": "^6.9.5",
+    "path": "^0.12.7"
+  }
 }

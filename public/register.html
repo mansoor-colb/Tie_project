@@ -10,6 +10,7 @@
     <script src="https://code.jquery.com/jquery-3.6.2.slim.min.js" integrity="sha256-E3P3OaTZH+HlEM7f1gdAT3lHAn4nWBZXuYe89DFg2d0=" crossorigin="anonymous"></script>
 
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
+    <link href="./plugins/sweetalert/css/sweetalert.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="css/style.css" rel="stylesheet">
     
@@ -43,20 +44,20 @@
                         <div class="card login-form mb-0">
                             <div class="card-body pt-5">
                                 
-                                    <a class="text-artist" href="index.html"> <h4>Rosella</h4></a>
+                                    <a class="text-artist" href="index.html"> <h4>Artsit Login Page</h4></a>
         
-                                <form class="mt-5 mb-5 login-input">
+                                <div class="mt-5 mb-5 login-input">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="artist" placeholder="Artist Name" required>
+                                        <input type="text" class="form-control" id="artist" placeholder="Artist Name" >
                                     </div>
                                     <div class="form-group">
-                                        <input type="email" class="form-control" id="email" placeholder="email" required>
+                                        <input type="email" class="form-control" id="email" placeholder="email" d>
                                     </div>
                                     <div class="form-group">
-                                        <input type="password"  id="Pass" class="form-control" placeholder="Password" required>
+                                        <input type="password"  id="Pass" class="form-control" placeholder="Password" >
                                     </div>
                                     <button class="btn login-form__btn submit w-100" id="signup">Sign in</button>
-                                </form>
+                                </div>
                                     <p class="mt-5 login-form__footer">Have account <a href="login.html" class="text-primary">Sign in </a> now</p>
                                     </p>
                                 </div>
@@ -72,25 +73,57 @@
     <script>
         $(document).ready(function(){
             $("#signup").on("click",function(){
+            
                let artist= $("#artist").val()
                 let email=$("#email").val()
                 let pass=$("#Pass").val()
+                const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+                const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
                 if(artist!='' && email!='' && pass!=''){
+                    if(artist.length <=3){
+                        swal("Invalid Artist name", "Please Enter Valid name with Atleast 5 characters", "error");
+                        return;
+                    }
+                    else if(!(emailPattern.test(email))){
+                        swal("Invalid Email", "Please Enter Valid Email id", "error");
+                        return;
+                    }
+                    else if(!(passwordPattern.test(pass))){
+                        swal("Invalid Password", "Please Enter Valid Password with minimun 6 characters containing Atleast one upper case,lowercase,special and numeric Character", "error");
+                        return;
+                    }
+                    else{
                     $.ajax({
-                                url:"http://localhost:1234/signup",
+                                url:"http://localhost:1233/signup",
                                 type:"post",
                                 dataType: "json",
                                 data: { Artist:artist,Email:email,Pass:pass
                                 },
                                 success: function(res){
-                                    alert(res.data);
+                                    if(res.status==200){
+                                        swal("Success","Account Created Successfully","success");
+                                        setTimeout(function(){
+                                            window.location.href='login.html'
+
+                                        
+                                        },2000)
+                                    }
+                                    else if(res.status==500){
+                                        swal("Error","Error while Creating Account","error");
+                                    }  
+                                    else{
+                                        swal("Server Down","Error while Creating Account","error");
+                                    }                                 
 
                                 }
                             })
+                        }
 
                 }
                 else{
-                    alert('Please Enter Correct Details')
+                    // alert(1);
+                    swal("Error...", "Please Enter Valid Credentials !!", "error");
+                    return;
                 }
             })
 
@@ -106,6 +139,8 @@
     <script src="js/settings.js"></script>
     <script src="js/gleek.js"></script>
     <script src="js/styleSwitcher.js"></script>
+    <script src="./plugins/sweetalert/js/sweetalert.min.js"></script>
+    <script src="./plugins/sweetalert/js/sweetalert.init.js"></script>
 </body>
 </html>
 
