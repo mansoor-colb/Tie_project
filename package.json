@@ -1,0 +1,19 @@
+{
+  "name": "music_band",
+  "version": "1.0.0",
+  "description": "A templete for music band and artist for tie internship",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mansoor-colb/tie_project.git"
+  },
+  "author": "Mansoor,Manisha,Meghana,Naveed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mansoor-colb/tie_project/issues"
+  },
+  "homepage": "https://github.com/mansoor-colb/tie_project#readme"
+}
