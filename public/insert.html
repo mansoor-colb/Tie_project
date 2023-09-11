@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+     <title>User Identification </title>
+    <!-- Favicon icon -->
+    <script src="https://code.jquery.com/jquery-3.6.2.slim.min.js" integrity="sha256-E3P3OaTZH+HlEM7f1gdAT3lHAn4nWBZXuYe89DFg2d0=" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+    <!-- Custom Stylesheet -->
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+    <!-- Custom Stylesheet -->
+    <link href="./plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
+    <!-- Page plugins css -->
+    <link href="./plugins/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet">
+    <!-- Color picker plugins css -->
+    <link href="./plugins/jquery-asColorPicker-master/css/asColorPicker.css" rel="stylesheet">
+    <!-- Date picker plugins css -->
+    <link href="./plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
+    <!-- Daterange picker plugins css -->
+    <link href="./plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+    <link href="./plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <link href="./plugins/toastr/css/toastr.min.css" rel="stylesheet">
+    <link href="./plugins/sweetalert/css/sweetalert.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="sweetalert2.min.css"> -->
+    <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+            </svg>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+    
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+        <div class="nav-header">
+            <div class="brand-logo">
+                <a href="index.html">
+                    <b class="logo-abbr"><img src="images/logo.png" alt=""> </b>
+                    <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
+                    <span class="brand-title">
+                        <img src="images/logo-text.png" alt="">
+                    </span>
+                </a>
+            </div>
+        </div>
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+
+        <!--**********************************
+            Header start
+        ***********************************-->
+        <div class="header">    
+            <div class="header-content clearfix">
+                
+                <div class="nav-control">
+                    <div class="hamburger">
+                        <span class="toggle-icon"><i class="icon-menu"></i></span>
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <ul class="clearfix">
+                        <li class="icons dropdown">
+                            <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
+                                <span class="activity active"></span>
+                                <img src="images/user/1.png" height="40" width="40" alt="">
+                            </div>
+                            <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
+                                <div class="dropdown-content-body">
+                                    <ul>
+                                        <li>
+                                            <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void()">
+                                                <i class="icon-envelope-open"></i> <span>Inbox</span> <div class="badge gradient-3 badge-pill gradient-1">3</div>
+                                            </a>
+                                        </li>
+                                        
+                                        <hr class="my-2">
+                                        <li>
+                                            <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
+                                        </li>
+                                        <li><a href="page-login.html"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        <div class="nk-sidebar">           
+            <div class="nk-nav-scroll">
+                <ul class="metismenu" id="menu">
+                    <li class="nav-label"><a href="./index.html">Dashboard</a></li>
+ 
+                    <li class="nav-label"><span class="nav-text"><a href="./insert.html">Create / Update</a></span></li>
+                    <li class="nav-label"><span class="nav-text"><a href="./search.html">Album</a></span></li>
+                    <li class="nav-label"><span class="nav-text"><a href="./Scan.html">Events</a></span></li>
+                    <li class="nav-label"><span class="nav-text"><a href="./Scan.html">Members</a></span></li>
+
+ 
+
+
+
+
+                </ul>
+            </div>
+        </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+
+            <!-- row -->
+            
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-validation">
+                                    <form class="form-valide" id="coverform">
+
+                                        <div class="container-fluid">
+                                            <div class="row" id="photopreview-row">
+                                                <div class="col" id ="photopreview">
+                                                    <div class="card" > 
+                                                    <div class="card-body"  >
+                                                            <div id="imgcontainer">
+                                                                <img src="assets/images/download.jpg" alt="..."  id="imageprofile">
+                                                                <!-- <img src="" alt=""> -->
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+
+                                                    <div class="custom-file">
+                                                        <label class="custom-file-label">Choose Cover Images </label>
+                                                        <input type="file" id="images" name="images" accept="image/*" multiple class="custom-file-input" />     
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label>Title<span class="text-danger">*</span></label>
+                                                <input type="text" id="val-bname" name="val-bname" class="form-control" placeholder="Enter Band/Artist  Name" >
+                                            </div>                               
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label>Tag Line<span class="text-danger">*</span></label>
+                                                <input type="text" id="val-tag" name="val-tag" class="form-control" placeholder="Enter Tag Line" >
+                                            </div>                   
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="form-group col-md-9">
+                                            <textarea class="form-control" id="val-suggestions" name="val-suggestions" rows="9" placeholder="How would you like to Describe yourself?"></textarea>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-row">
+
+                                            <div class="form-group col-md-6">
+                                                <label>Insta Page Url<span class="text-danger">*</span></label>
+                                                <input type="text" id="val-insta" name="val-insta" class="form-control" placeholder="Enter Your Instagram Page URL">
+                                            </div>
+                                 
+                                            <div class="form-group col-md-6">
+                                                <label>Youtube Page Url<span class="text-danger">*</span></label>
+                                                <input type="email" id="val-youtube" name="val-youtube" class="form-control" placeholder="Enter Your Youtube Page URL">
+                                            </div>
+                                            
+                                        </div>
+
+                                    <input type="text" id="aid" name="artist" hidden>
+                                    </div>
+                                    
+                                 
+                                    <div class="input-group mb-3" id="validate_section">
+                                    
+                                        <div class="input-group-append">
+                                            <button class="btn mb-1 btn-primary" id="submit" type="submit" value="Submit">Save</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+    
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script src="plugins/common/common.min.js"></script>
+    <script src="js/custom.min.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/gleek.js"></script>
+    <script src="js/styleSwitcher.js"></script>
+
+    <script src="./plugins/moment/moment.js"></script>
+    <script src="./plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+    <!-- Clock Plugin JavaScript -->
+    <script src="./plugins/clockpicker/dist/jquery-clockpicker.min.js"></script>
+    <!-- Color Picker Plugin JavaScript -->
+    <script src="./plugins/jquery-asColorPicker-master/libs/jquery-asColor.js"></script>
+    <script src="./plugins/jquery-asColorPicker-master/libs/jquery-asGradient.js"></script>
+    <script src="./plugins/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js"></script>
+    <!-- Date Picker Plugin JavaScript -->
+    <script src="./plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <!-- Date range Plugin JavaScript -->
+    <script src="./plugins/timepicker/bootstrap-timepicker.min.js"></script>
+    <script src="./plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+    <script src="./js/plugins-init/form-pickers-init.js"></script>
+    
+
+
+    <script src="./plugins/validation/jquery.validate.min.js"></script>
+    
+    <script src="./plugins/validation/jquery.validate-init.js"></script>
+    <script src="./plugins/toastr/js/toastr.min.js"></script>
+    <script src="./plugins/toastr/js/toastr.init.js"></script>
+    
+    <script src="./plugins/sweetalert/js/sweetalert.min.js"></script>
+    <script src="./plugins/sweetalert/js/sweetalert.init.js"></script>
+    <script src="insert.js"></script>
+    
+</body>
+
+</html>

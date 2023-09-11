@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const crypto = require('crypto');
+const multer = require('multer');
 const path = require("path");
 const nodemailer=require('nodemailer')
 // let formidable = require('formidable');
@@ -32,7 +33,14 @@ conn.connect((err) => {
 });
 
 
-
+const storage = multer.diskStorage({
+    destination: 'uploads/',
+    filename: (req, file, callback) => {
+      callback(null, file.fieldname + '-' + Date.now() + '.' + file.originalname.split('.').pop());
+    },
+  });
+  
+  const upload = multer({ storage: storage });
 
 
 const handleError = (err, res) => {
@@ -112,6 +120,33 @@ app.post("/signup", async (req,  res) => {
         })
     
         })
+
+
+
+//cover insert
+// ...
+// Handle form submission via AJAX
+app.post('/coverinsert', upload.array('images', 5), (req, res) => {
+    const {  'val-bname': title,  'val-bname': tag,'val-suggestions': description,'val-insta':insta,'val-youtube':youtube ,'artist':aid} = req.body;
+    const images = req.files.map((file) => file.filename);
+    console.log(images)
+    console.log(aid)
+let data={aid:aid,title:title,tag:tag,description:description,youtube:youtube,insta:insta,images:images.join(',')}
+    let sql = "INSERT INTO cover_info SET ?";
+	let query = conn.query(sql, data, (err, result) => {
+		if (err) {
+            res.send({ status: 500, error: null, response: result });
+            throw err
+        
+	}
+	else{
+		res.send({ status: 200, error: null, response: result});
+
+	}
+	})
+});
+// ...
+
 
 const PORT = process.env.PORT || 1233;
 app.listen(PORT, () => {
