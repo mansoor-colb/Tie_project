@@ -29,6 +29,7 @@ $(document).ready(function () {
                     if(res.status==200){
                         swal("Album Added Successfully")
                         albload();
+                        load()
                     }
                     else if(res.status==500){
                         swal("Insertion Failed","Error","error")
@@ -114,6 +115,7 @@ $('#trackform').submit(function (e) {
              // Handle the success response from the server
              if(res.status==200){
                  swal("Track Added Successfully")
+                 load()
 
              }
              else if(res.status==500){
@@ -186,13 +188,14 @@ function load(){
         // dataType: "json",
         success: function(res){
             if(res.status==200){
+                $("#accordion-two").html("");
                 console.log(res.response)
-
+let inc=1;
                 for(let item of res.response[0]){
                     console.log(item)
                     $("#accordion-two").append(`<div class="card">
                     <div class="card-header">
-                        <h5 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="false" aria-controls="collapseOne1"><i class="fa" aria-hidden="true"></i>${item.album_name}</h5>
+                        <h5 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne${inc}" aria-expanded="false" aria-controls="collapseOne1"><i class="fa" aria-hidden="true"></i>${item.album_name}</h5>
                     </div>`)
                     for(let inneritem of res.response[1]){
                        
@@ -200,7 +203,7 @@ function load(){
                       
                         $("#accordion-two").append(`
                         ${inneritem.album_id == item.album_id ? `
-                            <div id="collapseOne1" class="collapse" data-parent="#accordion-two">
+                            <div id="collapseOne${inc}" class="collapse" data-parent="#accordion-two">
                                 <div class="card-body">
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-striped verticle-middle">
@@ -215,12 +218,12 @@ function load(){
                                             <tbody>
                                                 <tr>
                                                     <td>${inneritem.audio_name}</td>
-                                                    <td>${inneritem.audio_name}</td>
+                                                    <td>${inneritem.artist_name}</td>
                                                     <td>  <audio id="audio-play" src="./tracks/${inneritem.audio_path}" controls></audio></td>
                                                     <td>
                                                         <div class="act">
-                                                            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil color-muted m-r-5"  data-id="${inneritem.track_id}"></i></a>
-                                                            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"><i class="fa fa-close color-danger" data-id="${inneritem.track_id}"></i></a>
+                                                            <a  href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i data-toggle="modal" data-target="#exampleModalCenter" id="tedit" class="fa fa-pencil color-muted m-r-5"  data-id="${inneritem.track_id}" data-name="${inneritem.audio_name}" data-artist="${inneritem.artist_name}" ></i></a>
+                                                            <a  href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"><i  id="tdel"  class="fa fa-close color-danger" data-id="${inneritem.track_id}" ></i></a>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -235,6 +238,7 @@ function load(){
                     // $("#albumcat").append(`<option value="${item.album_id}">${item.album_name}</option>`);
                     
                 }
+                inc++;
                 }
                 
 
@@ -250,7 +254,7 @@ function load(){
             }
         }
     })
-
+   
 }
 load()
 
@@ -283,7 +287,61 @@ function albload(){
 }
 albload();
 
-// $("#albumcat").click(albload());
+$(document).on('click', '#tdel', function() {
+   let trackid= $(this).data("id");
+   $.ajax({
+    url:"http://localhost:1233/deltrack",
+    type:"post",
+    dataType: "json",
+    data:{id:trackid},
+    success: function(res){
+        if(res.status==200){
+            swal("Track Deleted");
+            load();
+           
+
+        }
+        else if(res.status==500){
+            alert('Please try Later')
+        }
+    }
+})
+})
+
+$(document).on('click', '#tedit', function() {
+    let trackid= $(this).data("id");
+    let name=$(this).data("name");
+    let artist=$(this).data("artist");
+    $("#val-eaudio").val(`${name}`);
+    $("#val-esongartist").val(`${artist}`)
+    $("#saveedit").attr("tid",trackid);
+ })
+
+ $("#saveedit").click(function(){
+    let id=$(this).attr("tid");
+    let aud=$("#val-eaudio").val();
+let art=$("#val-esongartist").val();
+
+$.ajax({
+    url:"http://localhost:1233/edittrack",
+    type:"post",
+    dataType: "json",
+    data:{name:aud,artist:art,id:id},
+    success: function(res){
+        if(res.status==200){
+            swal("Track Updated");
+            load();
+           
+
+        }
+        else if(res.status==500){
+            alert('Please try Later')
+        }
+    }
+})
+ })
+
+
 
 });
     

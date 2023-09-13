@@ -1,6 +1,9 @@
 #imageprofile{
     width: 150px !important;
 }
+*{
+    box-sizing: border-box;
+}
 .albumimg{
    
     height: 80px;
@@ -8,4 +11,32 @@
 .act{
     display: flex;
     justify-content: space-around;
+}
+.bootstrap-media{
+    margin-bottom: 20px;
+}
+#fluid{
+    
+        max-width: 10%;
+        height: auto;
+        border-radius: 5px;
+        cursor: -webkit-zoom-in;
+        transition: 0.3s ease-in;
+
+}
+#fluid:hover{
+    transform: scale(1.8);
+}
+
+#memdata {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr); /* Two columns with equal width */
+    gap: 10px; /* Adjust the gap between grid items as needed */
+}
+
+/* Example grid item styles */
+#grid-item {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
 }
