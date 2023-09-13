@@ -6,6 +6,20 @@ $(document).ready(function () {
         e.preventDefault(); // Prevent the default form submission
 
         const formData = new FormData(this);
+        const imageFile = $('#images')[0].files[0];
+       //  const selectedCategory = $('#category').val();
+        if (
+            formData.get('val-bname').trim() === '' ||
+            formData.get('val-tag').trim() === '' ||
+            formData.get('val-suggestions').trim() === '' ||
+            formData.get('val-youtube').trim() === '' ||
+            formData.get('val-insta').trim() === '' ||
+           !(imageFile) 
+        ) {
+            swal("Invalid ",'Please fill in all fields',"error");
+            return;
+        }
+   
 
         $.ajax({
             type: 'POST',
@@ -71,6 +85,43 @@ $(document).ready(function () {
             }
         }
     });
+
+//load filled templete 
+function load(){
+    var aid=localStorage.getItem("artistid");
+    $.ajax({
+        url:"http://localhost:1233/getcover",
+        type:"post",
+        dataType: "json",
+        success: function(res){
+            if(res.status==200){
+                $("#val-bname").val(`${res.response[0].title}`)
+                $("#val-tag").val(`${res.response[0].tag}`)
+                $("#val-suggestions").val(`${res.response[0].description}`)
+                $("#val-insta").val(`${res.response[0].insta}`)
+                $("#val-youtube").val(`${res.response[0].youtube}`)
+
+                // console.log(item)
+                // for(let item of res.response){
+                //     console.log(item)
+                //     // $("#albumcat").append(`<option value="${item.album_id}">${item.album_name}</option>`);
+                // }
+                
+
+                console.log(res.response)
+              
+            }
+            else if(res.status==500){
+                // alert('Error')
+            }
+            else{
+                console.log(res)
+            }
+        }
+    })
+
+}
+load();
 
 
 });

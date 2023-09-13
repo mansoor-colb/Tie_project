@@ -147,94 +147,174 @@
             Content body start
         ***********************************-->
         <div class="content-body">
-
-            <!-- row -->
-            
             <div class="container-fluid">
-                <div class="row justify-content-center">
-                    <div class="col-lg-12">
+                <div class="row">
+                    <div class="col">
                         <div class="card">
                             <div class="card-body">
-                                <div class="form-validation">
-                                    <form class="form-valide" id="coverform">
-
-                                        <div class="container-fluid">
-                                            <div class="row" id="photopreview-row">
-                                                <div class="col" id ="photopreview">
-                                                    <div class="card" > 
-                                                    <div class="card-body"  >
-                                                            <div id="imgcontainer">
-                                                                <img src="assets/images/download.jpg" alt="..."  id="imageprofile">
-                                                                <!-- <img src="" alt=""> -->
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                
-                                            </div>
-                                            <div class="row">
-                                                <div class="col">
-
-                                                    <div class="custom-file">
-                                                        <label class="custom-file-label">Choose Cover Images </label>
-                                                        <input type="file" id="images" name="images" accept="image/*" multiple class="custom-file-input" />     
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                <label>Title<span class="text-danger">*</span></label>
-                                                <input type="text" id="val-bname" name="val-bname" class="form-control" placeholder="Enter Band/Artist  Name" >
-                                            </div>                               
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                <label>Tag Line<span class="text-danger">*</span></label>
-                                                <input type="text" id="val-tag" name="val-tag" class="form-control" placeholder="Enter Tag Line" >
-                                            </div>                   
-                                        </div>
-
-                                        <div class="form-row">
-                                            <div class="form-group col-md-9">
-                                            <textarea class="form-control" id="val-suggestions" name="val-suggestions" rows="9" placeholder="How would you like to Describe yourself?"></textarea>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="form-row">
-
-                                            <div class="form-group col-md-6">
-                                                <label>Insta Page Url<span class="text-danger">*</span></label>
-                                                <input type="text" id="val-insta" name="val-insta" class="form-control" placeholder="Enter Your Instagram Page URL">
-                                            </div>
-                                 
-                                            <div class="form-group col-md-6">
-                                                <label>Youtube Page Url<span class="text-danger">*</span></label>
-                                                <input type="text" id="val-youtube" name="val-youtube" class="form-control" placeholder="Enter Your Youtube Page URL">
-                                            </div>
-                                            
-                                        </div>
-
-                                    <input type="text" id="aid" name="artist" hidden>
-                                    </div>
+                                <h4 class="card-title">Track List</h4>
+                                <p class="text-muted"><code></code>
+                                </p>
+                                <div id="accordion-two" class="accordion">
                                     
-                                 
-                                    <div class="input-group mb-3" id="validate_section">
+       
                                     
-                                        <div class="input-group-append">
-                                            <button class="btn mb-1 btn-primary" id="submit" type="submit" value="Submit">Save</button>
-                                        </div>
-                                    </div>
-                                </form>
-                                   
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+   
+            
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Create Album </h4>
+                                <form class="form-valide" id="albumform">
+
+                                    <div class="container-fluid">
+                                        <div class="row" id="photopreview-row">
+                                            <div class="col" id ="photopreview">
+                                            
+                                                        <div id="imgcontainer" >
+                                                            <img src="assets/images/download.jpg" alt="..." class="albumimg" id="imageprofile">
+
+                                                </div>
+                                            </div>
+                                            
+                                        
+                                            <div class="col">
+
+                                                <div class="custom-file">
+                                                    <label class="custom-file-label">Choose Album Cover </label>
+                                                    <input type="file" id="images" name="images" accept="image/*"  class="custom-file-input" />     
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-row">
+
+                                        <div class="form-group col-md-6">
+                                            <label>Album Name<span class="text-danger">*</span></label>
+                                            <input type="text" id="val-album" name="val-album" class="form-control" placeholder="Enter Your Album name">
+                                        </div>
+                             
+                                        <div class="form-group col-md-6">
+                                            <label>Genere<span class="text-danger">*</span></label>
+                                            <input type="text" id="val-genere" name="val-genere" class="form-control" placeholder="Enter Album Genere">
+                                        </div>
+                                        
+                                    </div>
+
+                                   <input type="text" id="Aaid" name="artist" hidden>
+                               
+                                
+                             
+                                <div class="input-group mb-3" id="validate_section">
+                                
+                                    <div class="input-group-append">
+                                        <button class="btn mb-1 btn-primary" id="subalbum" type="submit" value="Submit">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            </form>
+                       
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Upload Track</h4>
+                                <form class="form-valide" id="trackform">
+
+                                    <div class="container-fluid">
+                                        <div class="row" id="Tphotopreview-row">
+                                            <div class="col" id ="Tphotopreview">
+                                            
+                                                 <div id="Timgcontainer" >
+                                                            <img src="assets/images/download.jpg" alt="..." class="trackimg" id="imageprofile">
+                                                            <!-- <img src="" alt=""> -->
+
+                                               
+                                                </div>
+                                                <div>
+                                                    <audio  id="audio-preview" controls>
+                                                      
+                                                    </audio>
+                                                </div>
+                                            </div>
+                                            
+                                        
+                                            <div class="col">
+
+                                                <div class="custom-file">
+                                                    <label class="custom-file-label">Choose Audio Cover </label>
+                                                    <input type="file" id="Timages" name="Timages" accept="image/*"  class="custom-file-input" />     
+                                                </div>
+                                                <div class="custom-file">
+                                                    <label class="custom-file-label">Choose Audio File </label>
+                                                    <input type="file" id="audio" name="audio" accept="audio/*"  class="custom-file-input" / >
+                                                     
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-row">
+
+                                        <div class="form-group col-md-6">
+                                            <label>Album category<span class="text-danger">*</span></label>
+                                           
+                                                <select id="albumcat" name="albumcat"class="form-control">
+                                                    <option >Choose Album...</option>
+                                                   
+                                                </select>
+                                          
+                                        </div>
+                             
+                                        <div class="form-group col-md-6">
+                                            <label>Audio name<span class="text-danger">*</span></label>
+                                            <input type="text" id="val-audio" name="val-audio" class="form-control" placeholder="Enter audio name">
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label>Artist name<span class="text-danger">*</span></label>
+                                        <input type="text" id="val-songartist" name="val-songartist" class="form-control" placeholder="EnterArtist name">
+                                    </div>
+                                </div>
+
+                                   <input type="text" id="Taid" name="artist" hidden>
+                               
+                                
+                             
+                                <div class="input-group mb-3" id="validate_section">
+                                
+                                    <div class="input-group-append">
+                                        <button class="btn mb-1 btn-primary" id="tracksubmit" type="submit" value="Submit">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+               
+                    
+                </div>
+            </div>
+        </div>
         
     
     </div>
@@ -277,7 +357,7 @@
     
     <script src="./plugins/sweetalert/js/sweetalert.min.js"></script>
     <script src="./plugins/sweetalert/js/sweetalert.init.js"></script>
-    <script src="insert.js"></script>
+    <script src="album.js"></script>
     
 </body>
 

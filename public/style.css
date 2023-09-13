@@ -1,3 +1,11 @@
 #imageprofile{
     width: 150px !important;
 }
+.albumimg{
+   
+    height: 80px;
+}
+.act{
+    display: flex;
+    justify-content: space-around;
+}
