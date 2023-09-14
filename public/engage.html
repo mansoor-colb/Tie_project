@@ -24,6 +24,7 @@
     <link href="./plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
     <link href="./plugins/toastr/css/toastr.min.css" rel="stylesheet">
     <link href="./plugins/sweetalert/css/sweetalert.css" rel="stylesheet">
+    <link href="./plugins/summernote/dist/summernote.css" rel="stylesheet">
     <!-- <link rel="stylesheet" href="sweetalert2.min.css"> -->
     <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
     <link href="css/style.css" rel="stylesheet">
@@ -146,59 +147,13 @@
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="modal fade" id="exampleModalCenter" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Edit Details</h5>
-                        <button type="button" class="close" data-dismiss="modal"><span>×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-row">
-
-                            <div class="form-group col-md-6">
-                               
-                               
-                                <label>Member name<span class="text-danger">*</span></label>
-                                <input type="text" id="val-ename" name="val-ename" class="form-control" placeholder="Enter audio name">
-                              
-                            </div>
-                 
-                            <div class="form-group col-md-6">
-                                <label>Member role<span class="text-danger">*</span></label>
-                                <input type="text" id="val-erole" name="val-erole" class="form-control" placeholder="Enter Artist name">
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" tid="" id="saveedit">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+     
 
 
        
 
         <div class="content-body">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-body" id ="memdata" >
-                           
-                               
-                               
-                                
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           
    
             
             <div class="container-fluid">
@@ -206,43 +161,14 @@
                     <div class="col">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Add Members</h4>
-                                <form class="form-valide" id="memberform">
-
-                                    <div class="container-fluid">
-                                        <div class="row" id="photopreview-row">
-                                            <div class="col" id ="photopreview">
-                                            
-                                                        <div id="imgcontainer" >
-                                                            <img src="assets/images/download.jpg" alt="..." class="albumimg" id="imageprofile">
-
-                                                </div>
-                                            </div>
-                                            
-                                        
-                                            <div class="col">
-
-                                                <div class="custom-file">
-                                                    <label class="custom-file-label">Choose Artist Image </label>
-                                                    <input type="file" id="images" name="images" accept="image/*"  class="custom-file-input" />     
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <h4 class="card-title"> Compose Mail</h4>
+                                <textarea id="cnt" class="form-control h-150px" rows="8" id="comment"></textarea>
                                     
-                                    <div class="form-row">
-
-                                        <div class="form-group col-md-6">
-                                            <label>Artist Name<span class="text-danger">*</span></label>
-                                            <input type="text" id="val-album" name="val-artist" class="form-control" placeholder="Enter Artist name">
-                                        </div>
-                             
-                                        <div class="form-group col-md-6">
-                                            <label>Artist Role<span class="text-danger">*</span></label>
-                                            <input type="text" id="val-genere" name="val-role" class="form-control" placeholder="Enter Artist role">
-                                        </div>
-                                        
-                                    </div>
+    
+    
+   
+                                    
+                                    
 
                                    <input type="text" id="Aaid" name="artist" hidden>
                                
@@ -251,12 +177,12 @@
                                 <div class="input-group mb-3" id="validate_section">
                                 
                                     <div class="input-group-append">
-                                        <button class="btn mb-1 btn-primary" id="subalbum" type="submit" value="Submit">Save</button>
+                                        <button class="btn mb-1 btn-primary" id="submail" type="submit" value="Submit">Send email</button>
                                     </div>
                                 </div>
-                            </div>
+                           
 
-                            </form>
+                            
                        
                             </div>
                         </div>
@@ -315,8 +241,35 @@
     
     <script src="./plugins/sweetalert/js/sweetalert.min.js"></script>
     <script src="./plugins/sweetalert/js/sweetalert.init.js"></script>
- 
-    <script src="member.js"></script>
+    <script src="./plugins/summernote/dist/summernote.min.js"></script>
+    <script src="./plugins/summernote/dist/summernote-init.js"></script>
+    <script src="engage.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#submail").on("click",function(){
+                let txt=$("#cnt").val();
+                $.ajax({
+
+                    url:"http://localhost:1233/sendmail",
+                    type:"post",
+                    dataType: "json",
+                    data:{txt:txt,aid:localStorage.getItem("artistid")},
+                    beforeSend:function(){
+                        $("#submail").html("Sending...");
+                    },
+                    success:function(res){
+                        if(res.status==200){
+                            swal("Email Sent Successfully");
+                        }
+                        else{
+                            swal("Email Failed","","error");
+                        }
+
+                    }
+                })
+            })
+        })
+    </script>
  
     
 </body>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Music Tracks</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+}
+
+.music-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.track-info {
+    display: flex;
+    align-items: center;
+}
+
+.track-poster {
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.track-name {
+    font-size: 18px;
+    margin: 0;
+}
+
+.artist {
+    font-size: 14px;
+    color: #777;
+    margin: 0;
+}
+
+.play-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.play-button:hover {
+    background-color: #0056b3;
+}
+
+.audio-player {
+    display: none; /* Initially hide the audio player */
+    max-width: 60%;
+}
+
+.download-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.download-button:hover {
+    background-color: #0056b3;
+}
+
+    </style>
+</head>
+<body>
+    <div class="music-row">
+        <div class="track-info">
+            <img src="poster1.jpg" alt="Track Poster" class="track-poster">
+            <div>
+                <h2 class="track-name">Track Name 1</h2>
+                <p class="artist">Artist Name 1</p>
+            </div>
+        </div>
+        <button class="play-button" onclick="toggleAudio('audio1')">Play</button>
+        <audio id="audio1" class="audio-player" controls>
+            <source src="audio1.mp3" type="audio/mpeg">
+        </audio>
+        <a class="download-button" href="download_link1.mp3" download>Download</a>
+    </div>
+
+    <!-- Add more music rows as needed -->
+
+    <script >
+        function toggleAudio(audioId) {
+    const audio = document.getElementById(audioId);
+    if (audio.style.display === 'block') {
+        audio.style.display = 'none';
+    } else {
+        audio.style.display = 'block';
+    }
+}
+
+    </script>
+</body>
+</html>

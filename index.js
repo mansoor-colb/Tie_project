@@ -137,7 +137,7 @@ app.post("/signin", (req, res) => {
   let query = conn.query(sql, async (err, result) => {
     if (result.length != 0) {
       var pid = await decrypt(result[0].artist_pass);
-      console.log(pid);
+      // console.log(pid);
       if (pid == req.body.Pass) {
         res.send(
           JSON.stringify({ status: 200, error: null, response: result })
@@ -166,13 +166,19 @@ app.post("/coverinsert", upload.array("images", 5), (req, res) => {
     artist: aid,
   } = req.body;
   const images = req.files.map((file) => file.filename);
-  console.log(images);
-  console.log(aid);
+  // console.log(images);
+  // console.log(aid);
   let msql = `select * from cover_info where aid="${aid}"`;
   let mquery = conn.query(msql, async (err, mresult) => {
     if (mresult.length != 0) {
+      let im=""
+      if(images.length!=0){
+        console.log(mresult)
+         im=mresult[0].images+","+images.join(",");
+      }
+    
       let sqlm = `UPDATE cover_info SET title='${title}' ,tag='${tag}', description='${description}' ,youtube='${youtube}' ,
-            insta='${insta}' where aid="${aid}"`;
+            insta='${insta}',images='${im}' where aid="${aid}"`;
       let querym = conn.query(sqlm, (err, resultm) => {
         if (err) {
           res.send({ status: 500, error: null, response: resultm });
@@ -207,11 +213,11 @@ app.post("/coverinsert", upload.array("images", 5), (req, res) => {
 app.post("/albuminsert", albumupload.array("images", 1), (req, res) => {
   const { "val-album": name, "val-genere": genere, artist: aid } = req.body;
   const images = req.files.map((file) => file.filename);
-  console.log(images);
+  // console.log(images);
   const min = 1000;
   const max = 9999;
   const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-  console.log(aid);
+  // console.log(aid);
   let data = {
     artist_id: aid,
     album_id: randomNumber,
@@ -245,8 +251,8 @@ app.post(
       artist: aid,
     } = req.body;
     const images = req.files["Timages"].map((file) => file.filename);
-    console.log(images);
-    console.log(aid);
+    // console.log(images);
+    // console.log(aid);
     const min = 1000;
     const max = 9999;
     const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -338,11 +344,11 @@ app.post("/deltrack", (req, res) => {
 app.post("/memberinsert", upload.array("images", 1), (req, res) => {
   const { "val-artist": name, "val-role": role, artist: aid } = req.body;
   const images = req.files.map((file) => file.filename);
-  console.log(images);
+  // console.log(images);
   const min = 1000;
   const max = 9999;
   const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-  console.log(aid);
+  // console.log(aid);
   let data = {
     band_id: aid,
     name: name,
@@ -366,7 +372,7 @@ app.post("/getmember", (req, res) => {
 
   let query = conn.query(sql, (err, result) => {
     if (result.length != 0) {
-      console.log(result);
+      // console.log(result);
 
       res.send({ status: 200, error: null, response: result });
     } else {
@@ -409,8 +415,7 @@ app.post("/eventinsert", upload.array("images", 5), (req, res) => {
     "artist": aid,
   } = req.body;
   const images = req.files.map((file) => file.filename);
-  console.log(images);
-  console.log(aid);
+
   const min = 1000;
   const max = 9999;
   const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -444,7 +449,7 @@ app.post("/getevent", (req, res) => {
   
     let query = conn.query(sql, (err, result) => {
       if (result.length != 0) {
-        console.log(result);
+        // console.log(result);
   
         res.send({ status: 200, error: null, response: result });
       } else {
@@ -482,6 +487,105 @@ app.post("/getevent", (req, res) => {
   });
 
 
+  app.post("/sendmail", (req, res) => {
+  
+    let sql = `SELECT * FROM fan_data where band_id="${req.body.aid}"`;
+  
+    let query = conn.query(sql, async(err, result) => {
+      if (result.length != 0) {   
+        // console.log(result)
+        for(let item of result){
+            // console.log(item.name)
+
+            let ma= await mail(item.email,item.name,req.body.txt);
+        }
+        
+       
+  
+        res.send({ status: 200, error: null, response: result });
+      } else {
+        res.send({ status: 500, error: null, response: result });
+      }
+    });
+
+
+
+    async function mail(to,name,txt){
+  
+          let transporter = nodemailer.createTransport({
+          
+              service: 'gmail', // true for 465, false for other ports
+              auth: {
+                user: 'webdearsproject@gmail.com', // generated ethereal user
+                pass: 'iefrtrdbsudvpsyx', // generated ethereal password
+              },
+            });
+          
+          
+            var mailoptions={
+              from:'webdearsproject@gmail.com',
+              to:to,
+              subject:"✨✨🎉Exciting News! New Article and Upcoming Event",
+              html:`<h3>Dear ${name},</h3>
+              <h5> We hope this email finds you well and in good spirits. We're thrilled to share some exciting updates  that we think you'll love!</h5>
+              <p></p>
+              <h5>
+              ${txt}
+              </h5>
+              
+              
+             Warm regards,
+              
+              <p> Organizing Team</p>
+              
+              
+              
+              <small>Mail AutoGenerated by Mansoor Ahmed (https://linktr.ee/mansoor.ahmed) </small>
+              <small>for any queries please mail to mansoorahmed52002@gmail.com</small>`,
+              
+            //   attachments:arr,
+          }
+            
+          
+           return new Promise(resolve => {
+            transporter.sendMail ( mailoptions, async function(err,info){
+      
+                 
+                      // return true;
+                      if(err){
+                          console.log(err)
+                            resolve(false)
+                        
+                          }
+                          else{
+                            console.log("done")
+                            resolve(true);
+                       
+                          
+                          }
+      
+                 
+            
+            
+              })
+          })
+              // console.log("ooooooooukkk")
+          }
+  });
+
+
+  ///////front end requests
+  app.post("/frontcover", (req, res) => {
+    let sql = `SELECT * FROM cover_info`;
+  
+    let query = conn.query(sql, (err, result) => {
+      if (err) {
+        res.send({ status: 500, error: null, response: result });
+      } else {
+        res.send(JSON.stringify({ status: 200, error: err, response: result }));
+      }
+    });
+  });
 
 
 

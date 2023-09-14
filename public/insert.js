@@ -13,8 +13,7 @@ $(document).ready(function () {
             formData.get('val-tag').trim() === '' ||
             formData.get('val-suggestions').trim() === '' ||
             formData.get('val-youtube').trim() === '' ||
-            formData.get('val-insta').trim() === '' ||
-           !(imageFile) 
+            formData.get('val-insta').trim() === '' 
         ) {
             swal("Invalid ",'Please fill in all fields',"error");
             return;
