@@ -165,7 +165,7 @@ $(document).ready(function(){
                 }
                 else if(res.status==500){
                     $("#memdata").html("");
-                    // alert('Error')
+                    $("#memdata").html("<p style='position:relative;margin-left:25px'>No Memeber Added yet</p>")
                 }
                 else{
                     alert('Error')
@@ -177,5 +177,228 @@ $(document).ready(function(){
       }
 loadband()
 
+
+ 
+
+ function loadevent(){
+    $.ajax({
+        url:"http://localhost:1233/getevent",
+        type:"post",
+        data:{aid:val},
+        // dataType: "json",
+        success: function(res){
+            if(res.status==200){
+                $("#events").html("")
+                // $("#events").append(`  
+                // `)
+                let inc=1;
+                
+                for(let item of res.response){
+                    let arr=item.images.split(",");
+
+                   $("#events").append(`
+                   <div class="row tour_details"> 
+        <div class="tour-date">
+        <img id="eveimg" src="../uploads/${arr[0]}">
+           
+        </div>
+        <div>
+        <div><h2>${item.event}</h2>
+        <p> 📅 ${item.date}</p>
+        <p> 📍${item.loc}</p>
+        </div>
+       
+       
+     
+            <button id="ticket" dt="${item.date}" name="${item.event}" desc="${item.desc} pr="${item.price}" loc="${item.loc}">View Details</button>
+       
+        </div>
+    </div> `)
+            
+                 
+                inc++;
+              
+                
+              
+            }
+            if(inc==1){
+                
+                $("#events").append(`
+                <div class="row tour_details"> 
+                <div class="tour-date">
+                <img id="eveimg" src="../uploads/coming.jpg">
+                   
+                </div>
+                <div>
+                <div><h2>Tremendous</h2>
+                <p> 📅 --/--/---</p>
+                <p> 📍.....</p>
+                </div>
+               
+               
+             
+                    <button id="ticket" dt="${item.date}" name="${item.event}" desc="${item.desc} pr="${item.price}" loc="${item.loc}">Coming soon</button>
+               
+                </div>
+            </div> `);
+
+            }
+           
+        }
+            else if(res.status==500){
+                $("#events").html("")
+            
+                $("#events").append(`
+                <div class="row tour_details"> 
+                <div class="tour-date">
+                <img id="eveimg" src="../uploads/coming.jpg">
+                   
+                </div>
+                <div>
+                <div><h2>Tremendous</h2>
+                <p> 📅 --/--/---</p>
+                <p> 📍.....</p>
+                </div>
+               
+               
+             
+                    <button id="ticket" dt="${item.date}" name="${item.event}" desc="${item.desc} pr="${item.price}" loc="${item.loc}">Coming soon</button>
+               
+                </div>
+            </div>`);
+            }
+            else{
+                alert('Error')
+                console.log(res)
+            }
+        }
+    })
+ }
+loadevent()
+$(document).on("click",".closee",function(){
+    $("#myModal").css({"display":"none"});
+})
+
     
+
+  
+
+
+window.onclick = function(event) {
+    var modal = document.getElementById("myModal");
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+$(document).on("click","#ticket",function(){
+    $("#myModal").css({"display":"block"});
+
+
+
+   
+//    alert( $(this).attr("loc"))
+})
+
+
+function loadcomments(){
+    $.ajax({
+        url:"http://localhost:1233/getcomment",
+        type:"post",
+        data:{aid:val},
+        // dataType: "json",
+        success: function(res){
+            if(res.status==200){
+                $("#comments").html("")
+           
+                let inc=1;
+                
+                for(let item of res.response){
+                   let name=item.user_name;
+                   if(item.user_id==localStorage.getItem("userid")){
+                    name="you";
+                   }
+
+                   $("#comments").append(`
+                   <div class="comment">
+                <strong><h4>${name}</h4></strong>
+                <p>-----: ${item.user_msg}</p>
+
+            </div>`)
+            
+                 
+                inc++;
+              
+                
+              
+            }
+            if(inc==1){
+                
+                $("#comments").append(`<div class="comment">
+                <strong><h4>No message</h4></strong>
+                <p>.....</p>
+
+            </div> `);
+
+            }
+           
+        }
+            else if(res.status==500){
+                $("#comments").html("")
+            
+                $("#comments").append(`<div class="comment">
+                <strong><h4>No message</h4></strong>
+                <p>.....</p>
+
+            </div>`);
+            }
+            else{
+                alert('Error')
+                console.log(res)
+            }
+
+            $("#comments").append(` <div class="blog__details__form col-lg-12">
+            <div class="blog__details__form__title">
+                <h4>Leave a comment</h4>
+            </div>
+            <div id="cmtbox">
+                
+                <textarea placeholder="Comment" id="txtcomment"></textarea>
+                <button id="mkcomment"  class="site-btn">SEND MESSAGE</button>
+           </div>
+        </div>`)
+        }
+    })
+}
+loadcomments()
+$(document).on("click","#mkcomment",function(){
+ if(!localStorage.getItem(userid)){
+    if(confirm("Please login to make Comment")){
+        window.location.href="http://localhost:1233/frontend/index.html?aid=053e3aafdb577fa5aa0dfe1b3e639f4d"
+    }
+ }
+let v=$("#txtcomment").val();
+if(v=="" ||v==null){
+    alert("Please enter a valid comment");
+    return;
+}
+else{
+$.ajax({
+    type: "Post",
+    url:"http://localhost:1233/putcomment",
+    data: {txt:v,uid:localStorage.getItem("userid")},
+    dataType: "json",
+    success: function (response) {
+        if(response.status==200){
+            loadcomments();
+        }
+
+        else{
+            alert("Please try later");
+        }
+        // alert(8)
+    }
+});
+}
+})
+
 })

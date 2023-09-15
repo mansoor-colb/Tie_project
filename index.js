@@ -153,6 +153,54 @@ app.post("/signin", (req, res) => {
   });
 });
 
+
+
+
+
+
+//loginuser
+app.post("/signinuser", (req, res) => {
+  let sql = `SELECT * FROM user where user_email="${req.body.Artist}"`;
+
+  let query = conn.query(sql, async (err, result) => {
+    if (result.length != 0) {
+      var pid = await decrypt(result[0].user_pass);
+      // console.log(pid);
+      if (pid == req.body.Pass) {
+        res.send(
+          JSON.stringify({ status: 200, error: null, response: result })
+        );
+      } else {
+        res.send(
+          JSON.stringify({ status: 500, error: null, response: result })
+        );
+      }
+    } else {
+      res.send(JSON.stringify({ status: 700, error: null, response: result }));
+    }
+  });
+});
+
+app.post("/signupuser", async (req, res) => {
+  var id = await encrypt();
+  var pid = await encrypt(req.body.Pass);
+  let data = {
+    user_id: id,
+    user_name: req.body.Artist,
+    user_email: req.body.Email,
+    user_pass: pid,
+  };
+  let sql = "INSERT INTO user SET ?";
+  let query = conn.query(sql, data, (err, result) => {
+    if (err) {
+      res.send(JSON.stringify({ status: 500, error: null, response: result }));
+      throw err;
+    } else {
+      res.send(JSON.stringify({ status: 200, error: null, response: id }));
+    }
+  });
+});
+
 //cover insert
 // ...
 // Handle form submission via AJAX
@@ -173,7 +221,7 @@ app.post("/coverinsert", upload.array("images", 5), (req, res) => {
     if (mresult.length != 0) {
       let im=""
       if(images.length!=0){
-        console.log(mresult)
+        // console.log(mresult)
          im=mresult[0].images+","+images.join(",");
       }
     
@@ -309,7 +357,7 @@ app.post("/getalbumtrack", (req, res) => {
 
   let query = conn.query(sql, [1, 2], (err, result) => {
     if (result.length != 0) {
-      console.log(result);
+      // console.log(result);
 
       res.send({ status: 200, error: null, response: result });
     } else {
@@ -453,6 +501,24 @@ app.post("/getevent", (req, res) => {
   
         res.send({ status: 200, error: null, response: result });
       } else {
+        console.log(err)
+        res.send({ status: 500, error: null, response: result });
+      }
+    });
+  });
+
+
+  app.post("/getcomment", (req, res) => {
+  
+    let sql = `SELECT * FROM comments`;
+  
+    let query = conn.query(sql, (err, result) => {
+      if (result.length != 0) {
+        // console.log(result);
+  
+        res.send({ status: 200, error: null, response: result });
+      } else {
+        console.log(err)
         res.send({ status: 500, error: null, response: result });
       }
     });
@@ -472,6 +538,33 @@ app.post("/getevent", (req, res) => {
         res.send(JSON.stringify({ status: 200, error: err, response: result }));
       }
     });
+  });
+
+  app.post("/putcomment", (req, res) => {
+    const min = 1000;
+  const max = 9999;
+  const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+  let sq=`select user_name from user where user_id="${req.body.uid}"`
+  let q = conn.query(sq, (err, ress) => {
+console.log(ress)
+
+  let data={
+    user_id:req.body.uid,
+    msg_id:randomNumber,
+    user_name:ress[0].user_name,
+    user_msg:req.body.txt,
+  }
+    let sql = `INSERT INTO comments SET ? `;
+  
+    let query = conn.query(sql,data, (err, result) => {
+      if (err) {
+        console.log(err)
+        res.send({ status: 500, error: null, response: 1});
+      } else {
+        res.send(JSON.stringify({ status: 200, error: err, response: 1}));
+      }
+    });
+  })
   });
   
   app.post("/delevent", (req, res) => {

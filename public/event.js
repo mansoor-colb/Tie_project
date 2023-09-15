@@ -86,6 +86,7 @@ $(document).ready(function () {
 
 
     function load(){
+        // alert(8)
         var aid=localStorage.getItem("artistid");
         $.ajax({
             url:"http://localhost:1233/getevent",
@@ -93,6 +94,7 @@ $(document).ready(function () {
             data:{aid:aid},
             // dataType: "json",
             success: function(res){
+                console.log(res)
                 if(res.status==200){
                     $("#memdata").html("");
                     // $("#memdata").append(`<h4 class="card-title">Member List</h4>`);
@@ -133,7 +135,7 @@ $(document).ready(function () {
                   
                 }
                 else if(res.status==500){
-                    // alert('Error')
+                    alert(res.status)
                     $("#memdata").html("");
                 }
                 else{
