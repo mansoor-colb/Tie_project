@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Music Band</title>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.2.slim.min.js" integrity="sha256-E3P3OaTZH+HlEM7f1gdAT3lHAn4nWBZXuYe89DFg2d0=" crossorigin="anonymous"></script>
@@ -28,6 +29,36 @@
 	height: 502px;
 	overflow-y: auto;
 }
+.swiper {
+      width: 100%;
+      height: 100%;
+    }
+
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%; 
+    }
+    .swiper-slide video {
+        display: block;
+      width: 100%;
+      height: 100%; 
+    }
+
+    .swiper {
+      width: 100%;
+      height: 300px;
+      margin: 20px 0;
+    }
     </style>
 </head>
 
@@ -41,8 +72,22 @@
             <h2 id="evehead"></h2>
           </div>
           <div class="modal-body">
-            <p>Some text in the Modal Body</p>
-            <p>Some other text...</p>
+            <div class="gallery">
+                <div class="swiper mySwiper3">
+                    <div class="swiper-wrapper">
+
+                        <div class="swiper-slide">
+                            <img src="../uploads/images-1694540783448.png" alt="">
+                        </div>
+                      
+                    </div>
+                    <div class="swiper-pagination"></div>
+                  </div>
+            </div>
+            <div class="details">
+               
+            </div>
+           
           </div>
           <div class="modal-footer">
             <h3 id="evefoot"></h3>
@@ -80,7 +125,7 @@
                                         <li><a href="./blog-details.html">Blog Details</a></li>
                                     </ul>
                                 </li> -->
-                                <li><a href="./contact.html">Contact</a></li>
+                                <li><a href="#contact">Contact</a></li>
                             </ul>
                         </nav>
                         <div class="header__right__social">
@@ -130,7 +175,7 @@
                 </div>
                 <div class="col-lg-5">
                     <div class="track__all">
-                        <a href="#" class="primary-btn border-btn">View all tracks</a>
+                        <a href="#disco" class="primary-btn border-btn">View all tracks</a>
                     </div>
                 </div>
             </div>
@@ -267,30 +312,32 @@
                             <div class="service__item deep-bg">
                                 <img src="img/services/service-1.png" alt="">
                                 <h4>Wedding</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
+                                <p>Make your special day memorable with our live music performance. We'll set the  great  wedding.</p>
                             </div>
                         </div>
                         <div class="col-lg-6 p-0 order-lg-2 col-md-6 order-md-2">
                             <div class="service__item">
                                 <img src="img/services/service-2.png" alt="">
-                                <h4>Clubs and bar</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
+                                <h4>Clubs and Bars</h4>
+                                <p>Experience the ultimate nightlife with our high-energy music at top clubs and bars.</p>
                             </div>
                         </div>
                         <div class="col-lg-6 p-0 order-lg-4 col-md-6 order-md-4">
                             <div class="service__item deep-bg">
                                 <img src="img/services/service-4.png" alt="">
-                                <h4>DJ lessons</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
+                                <h4>DJ Lessons</h4>
+                                <p>Learn the art of DJing from our experienced DJs and refine your skills.</p>
                             </div>
                         </div>
                         <div class="col-lg-6 p-0 order-lg-3 col-md-6 order-md-3">
                             <div class="service__item">
                                 <img src="img/services/service-3.png" alt="">
-                                <h4>Corporate events</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
+                                <h4>Corporate Events</h4>
+                                <p>Elevate your corporate events with our live music performances. We'll create a  entertaining atmosphere .</p>
                             </div>
                         </div>
+                        
+                        
                     </div>
                 </div>
             </div>
@@ -425,12 +472,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 offset-lg-1 col-md-6">
+                <div class="col-lg-3 offset-lg-1 col-md-6" id="contact">
                     <div class="footer__newslatter">
                         <h4>Stay With me</h4>
-                        <form action="#">
-                            <input type="text" placeholder="Email">
-                            <button type="submit"><i class="fa fa-send-o"></i></button>
+                        <form onsubmit="preventDefaultAction(event)">
+                            <input type="text" placeholder="Email" id="nemail">
+                            <button type="submit" id="newsletter"><i class="fa fa-send-o"></i></button>
                         </form>
                     </div>
                 </div>
@@ -456,10 +503,36 @@
     <!-- Music Plugin -->
     <script src="js/jquery.jplayer.min.js"></script>
     <script src="js/jplayerInit.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
     <script>
-        // Get the modal
-       
-        </script>
+        function preventDefaultAction(event) {
+            event.preventDefault(); // Prevents the default form submission
+           
+        }
+      var swiper = new Swiper(".mySwiper", {
+        spaceBetween: 30,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+      });
+      var swiper2 = new Swiper(".mySwiper2", {
+        spaceBetween: 30,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+      });
+      var swiper3 = new Swiper(".mySwiper3", {
+        spaceBetween: 30,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+      });
+    </script>
 </body>
 
 </html>

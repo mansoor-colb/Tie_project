@@ -18,6 +18,10 @@
 	--grey9:#999999;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 html,
 body {
 	height: 100%;
@@ -903,7 +907,7 @@ ol {
 
 .track__pic img {
 	position: relative;
-	top: -50px;
+	/* top: -50px; */
 	width: calc(100% - 40px);
 	margin-left: 40px;
 	height: 502px;
@@ -2200,8 +2204,11 @@ body {
 }
 
 #wheel {
-    width: 200px;
-    height: 200px;
+	width: 93%;
+    height: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
     position: relative;
     transition: transform 0.5s ease-in-out;
 }
@@ -2212,7 +2219,8 @@ body {
 	border-radius: 50%;
     transform-origin: center;
 }
-.track__content {height:auto !important}
+.track__content {
+	height:auto !important}
 @keyframes rotate {
     0% {
         transform: rotate(0deg);
@@ -2230,23 +2238,7 @@ body {
         transform: translate(-100px, -100px); /* Translate by negative values to reverse the movement */
     }
 }
-@media screen and (max-width: 768px) {
-	.music-row {
-		flex-direction: column;
-		gap: 10px;
-	}
-	.track-info {
-		width:100%;
-		
-		justify-content: space-between;
-	}
-	#parts{
-		width:100%;
-		
-		justify-content: space-between;
-	}
 
-}
 textarea{    width: 100%;
    min-height: 150px;
     padding: 25px;}
@@ -2316,10 +2308,50 @@ textarea{    width: 100%;
 	color: white;
   }
   
-  .modal-body {padding: 2px 16px;}
+  .modal-body {padding: 2px 16px;
+display: flex !important;}
   
+.gallery{
+	width: 40%;
+	padding: 15px;
+}
+.details{
+	width: 60%;
+	padding :15px;
+	border: 1px solid black;
+	border-radius: 25px;
+}
   .modal-footer {
 	padding: 2px 16px;
 	background-color: #5cb85c;
 	color: white;
   }
+  @media screen and (max-width: 768px) {
+	.music-row {
+		flex-direction: column;
+		gap: 10px;
+	}
+	.track-info {
+		width:100%;
+		
+		justify-content: space-between;
+	}
+	#parts{
+		width:100%;
+		
+		justify-content: space-between;
+	}
+	.modal-body {padding: 2px 16px;
+		display: flex !important;
+	flex-direction: column;}
+		  
+		.gallery{
+			width: 100%;
+			padding: 15px;
+		}
+		.details{
+			width: 100%;
+			padding :15px;
+			border: 1px solid black;
+		}
+}

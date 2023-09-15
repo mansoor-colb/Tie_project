@@ -54,6 +54,9 @@ $(document).ready(function(){
                 </div>
                         </div>`)
                         inc++;
+                        if(inc==4){
+                            break;
+                        }
                 }
                 const rotatingWheel = document.getElementById('rotating-wheel');
                 const audioElements = document.querySelectorAll('.audio-player');
@@ -195,11 +198,16 @@ loadband()
                 
                 for(let item of res.response){
                     let arr=item.images.split(",");
-
+                    let img="";
+                    for(let p of arr){
+                        if(!p.includes("mp4")){
+                            img=p;
+                        }
+                    }
                    $("#events").append(`
                    <div class="row tour_details"> 
         <div class="tour-date">
-        <img id="eveimg" src="../uploads/${arr[0]}">
+        <img id="eveimg" src="../uploads/${img}">
            
         </div>
         <div>
@@ -210,7 +218,7 @@ loadband()
        
        
      
-            <button id="ticket" dt="${item.date}" name="${item.event}" desc="${item.desc} pr="${item.price}" loc="${item.loc}">View Details</button>
+            <button id="ticket" dt="${item.date}" name="${item.event}" desc="${item.desp}" pr="${item.price}" loc="${item.loc}" img="${item.images} ">View Details</button>
        
         </div>
     </div> `)
@@ -237,7 +245,7 @@ loadband()
                
                
              
-                    <button id="ticket" dt="${item.date}" name="${item.event}" desc="${item.desc} pr="${item.price}" loc="${item.loc}">Coming soon</button>
+                    <button id="ticket" dt="${item.date}" name="${item.event}" desc="${item.desp} pr="${item.price}" loc="${item.loc}">Coming soon</button>
                
                 </div>
             </div> `);
@@ -262,7 +270,7 @@ loadband()
                
                
              
-                    <button id="ticket" dt="${item.date}" name="${item.event}" desc="${item.desc} pr="${item.price}" loc="${item.loc}">Coming soon</button>
+                    <button id="ticket" dt="${item.date}" name="${item.event}" desc="${item.desp} pr="${item.price}" loc="${item.loc}" img="${item.images}">Coming soon</button>
                
                 </div>
             </div>`);
@@ -292,6 +300,41 @@ window.onclick = function(event) {
   }
 $(document).on("click","#ticket",function(){
     $("#myModal").css({"display":"block"});
+    let arr=$(this).attr("img")
+    arr=arr.split(",")
+   
+    
+    
+    $(".swiper-wrapper").html("")
+    for(let i of arr){
+        if(i.includes("mp4")){
+        $(".swiper-wrapper").append(`
+        <div class="swiper-slide">
+        <video controls>
+  <source src="../uploads/${i}" type="video/mp4">
+  <source src="../uploads/${i}" type="video/ogg">
+ 
+</video>
+
+        `)}
+        else{
+            $(".swiper-wrapper").append(`
+            <div class="swiper-slide">
+            <img src="../uploads/${i}" alt="">
+          </div>
+       `)
+        }
+        
+    }
+    $(".details").html("")
+    $(".details").append(`
+    <h4>${$(this).attr("name")}</h4>
+    <p> 📅 ${$(this).attr("dt")}</p>
+    <p>📍 ${$(this).attr("loc")}</p>
+    <p>About the event:<br> ${$(this).attr("desc")}</p>
+    <p> Tickets:${$(this).attr("pr")}</p>
+    <button style="padding:15px;border-radius:14px;letter-spacing:1px;background:#0056b3;border:0px solid black;color:white">Book</button>`)
+
 
 
 
@@ -399,6 +442,31 @@ $.ajax({
     }
 });
 }
+})
+
+
+
+$("#newsletter").click(function(){
+    let em=$("#nemail").val();
+    $.ajax({
+        type: "post",
+        url: "http://localhost:1233/newzletter",
+        data: {email:em,band_id:val,uid:localStorage.getItem("userid")},
+        dataType: "json",
+        beforeSend:function(){
+            $("#nemail").val("Please Wait...")
+        },
+        success: function (response) {
+        if(response.status==200){
+            $("#nemail").val(em)
+            alert("Subscription successfull 🎉🎉")
+        }
+        else{
+            alert("some error occured")
+        }
+            
+        }
+    });
 })
 
 })
