@@ -17,7 +17,7 @@
     <!-- Chartist -->
     <link rel="stylesheet" href="./plugins/chartist/css/chartist.min.css">
     <link rel="stylesheet" href="./plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css">
-
+<link rel="stylesheet" href="style.css">
     <link href="css/style.css" rel="stylesheet">
 
 </head>
@@ -110,7 +110,26 @@
             Content body start
         ***********************************-->
         <div class="content-body">
-
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                               <h4 id="shareweb"style="color: blue;cursor: pointer;">Share website: <i class="icon-share"></i></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body" style="width: 100%;height: 100vh;">
+                                <iframe src="http://localhost:1233/frontend/index.html?aid=053e3aafdb577fa5aa0dfe1b3e639f4d" frameborder="0"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
           
             <!-- #/ container -->
         </div>
@@ -165,6 +184,26 @@
 
 
     <script src="./js/dashboard/dashboard-1.js"></script>
+    <script>
+    
+    
+    $("#shareweb").on("click",function(){
+        
+        if (navigator.share) {
+        navigator.share({
+            title: 'Sukuun Pulse',
+            text: 'Check out this cool website!',
+            url: 'http://localhost:1233/frontend/index.html?aid=053e3aafdb577fa5aa0dfe1b3e639f4d'
+        })
+        .then(() => console.log('Share successful'))
+        .catch((error) => console.error('Share failed', error));
+    } else {
+        // Fallback for browsers that do not support the Share API
+        alert('Sharing is not supported in your browser.');
+    }
+})
+
+</script>
 
 </body>
 

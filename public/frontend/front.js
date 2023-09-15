@@ -468,5 +468,25 @@ $("#newsletter").click(function(){
         }
     });
 })
+// Select the :root element
+// const root = document.documentElement;
+
+// // Change the values of the CSS variables
+// root.style.setProperty('--black11', '#000000');
+// root.style.setProperty('--brown44', '#663300');
+// root.style.setProperty('--white', '#e5e5e5');
+// root.style.setProperty('--white2', '#ffcccb');
+// root.style.setProperty('--navyBlue', '#00008b');
+// root.style.setProperty('--black', '#222222');
+// root.style.setProperty('--red', '#ff0000');
+// root.style.setProperty('--purple', '#800080');
+// root.style.setProperty('--darkBlue', '#0d004c');
+// root.style.setProperty('--grey', '#777777');
+// root.style.setProperty('--border', '#dddddd');
+// root.style.setProperty('--white3', '#fdfdfd');
+// root.style.setProperty('--purple2', '#a700cc');
+// root.style.setProperty('--blue3', '#3700ff');
+// root.style.setProperty('--grey2', '#444444');
+// root.style.setProperty('--grey9', '#999999');
 
 })
