@@ -290,7 +290,7 @@ ol {
 }
 
 .header__logo {
-	padding: 20px 0 25px;
+	padding: 35px 0 0px;
 }
 
 .header__logo a {
@@ -300,6 +300,7 @@ ol {
 .header__nav {
 	text-align: right;
 }
+
 
 .header__menu {
 	padding: 31px 0 27px;
@@ -600,7 +601,7 @@ ol {
 }
 
 .event__item__text p {
-	color: var(--grey);
+	color: var(--black11);
 	margin-bottom: 0;
 }
 
