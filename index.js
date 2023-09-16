@@ -214,14 +214,14 @@ app.post("/coverinsert", upload.array("images", 5), (req, res) => {
     artist: aid,
   } = req.body;
   const images = req.files.map((file) => file.filename);
-  console.log(images);
+  // console.log(images);
   // console.log(aid);
   let msql = `select * from cover_info where aid="${aid}"`;
   let mquery = conn.query(msql, async (err, mresult) => {
     if (mresult.length != 0) {
       let im=""
       if(images.length!=0){
-        console.log(mresult)
+        // console.log(mresult)
          im=mresult[0].images+","+images.join(",");
       }
     
@@ -546,7 +546,7 @@ app.post("/getevent", (req, res) => {
   const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
   let sq=`select user_name from user where user_id="${req.body.uid}"`
   let q = conn.query(sq, (err, ress) => {
-console.log(ress)
+// console.log(ress)
 
   let data={
     user_id:req.body.uid,

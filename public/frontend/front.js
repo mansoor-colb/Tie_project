@@ -305,7 +305,7 @@ $(document).on("click","#ticket",function(){
    
     
     
-    $(".swiper-wrapper").html("")
+    $("#swiper-wrapper").html("")
     for(let i of arr){
         if(i.includes("mp4")){
         $(".swiper-wrapper").append(`
