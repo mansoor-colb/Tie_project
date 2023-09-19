@@ -45,14 +45,25 @@ This repository contains the codebase for a dynamic and user-friendly music band
 
 1. Clone this repository to your local machine.
 2. Install the required dependencies using npm.
-3. Set up your MySQL database and configure the connection in the Node.js application.
-4. Run the Node.js application to start the website.
+3. Set up your MySQL database (import the db file attached into php myadmin under music_band database )and configure the connection in the Node.js application.
+4. Run the Node.js application by writing (node index.js ) to start the website.
 
 ## Getting Started
 
-1. Access the website by opening your web browser and navigating to the specified URL.
-2. Explore the website, view upcoming events, read about the band, and enjoy the music.
-3. If you're an administrator, access the admin panel to update website content, schedule events, and manage subscribers.
+## user Access
+
+1. Access the website as a [User] by opening your web browser and navigating to the URL(http://localhost:1233/frontend/).
+2. You as a user get to explore the website, view upcoming events, read about the band, and enjoy the music and much more. Also you can subscribe to the newzletter if not registed or loggedin, you will get an instant email confiromtion to the provided email regarding the subscription.
+3. For quick testing(in order to comment as well ) you can login using user emailid=1dt20cs075@dsatm.edu.in and password="Man@1234"or can register as a new user By creating account.
 
 
-Thank you for visiting our Music Band Website repository. Enjoy the music! 🎶
+## Admin access
+1. If you're an administrator, access the admin panel to update website content, schedule events, and manage subscribers under url (http://localhost:1233/)
+2. Admin credentials Artistemailid="1dt20cs075@dsatm.edu.in" password="Man@1234" Note (tie testing team )="since upon  importing database it consists details of a Specific  music band already so it is  suggested to login with the same credentials and manage the admin panel"
+3. Upon successfull login you get to manage and Dynamically update the cover page images,Description, title and much more.Next you get to Create albums and add new tracks to these albums with audio file and images,also update details of band memebrs along with scheduling events.
+4. The panel consists of Fan engagement section where admin can type the information to be shared with subscribers and upon sending, the information is automatically delivered to respective subscribers email id.
+
+
+Thank you for visiting our Music Band Website repository.Enjoy the music! 🎶
+
+ For any queries you can Feel free to reach us out team Programmers at mansoorahmes52002@gmail.com or call at 9538474018.
