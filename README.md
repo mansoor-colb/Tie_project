@@ -66,4 +66,4 @@ This repository contains the codebase for a dynamic and user-friendly music band
 
 Thank you for visiting our Music Band Website repository.Enjoy the music! 🎶
 
- For any queries you can Feel free to reach us out team Programmers at mansoorahmes52002@gmail.com or call at 9538474018.
+For any queries you can Feel free to reach us out team Programmers at mansoorahmes52002@gmail.com or call at 9538474018.
