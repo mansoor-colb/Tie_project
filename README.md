@@ -59,7 +59,7 @@ This repository contains the codebase for a dynamic and user-friendly music band
 
 ## Admin access
 1. If you're an administrator, access the admin panel to update website content, schedule events, and manage subscribers under url (http://localhost:1233/)
-2. Admin credentials Artistemailid="1dt20cs075@dsatm.edu.in" password="Man@1234" Note (tie testing team )="since upon  importing database it consists details of a Specific  music band already so it is  suggested to login with the same credentials and manage the admin panel"
+2. Admin credentials Artistemailid="1dt20cs075@dsatm.edu.in" password="Man@123" Note (tie testing team )="since upon  importing database it consists details of a Specific  music band already so it is  suggested to login with the same credentials and manage the admin panel"
 3. Upon successfull login you get to manage and Dynamically update the cover page images,Description, title and much more.Next you get to Create albums and add new tracks to these albums with audio file and images,also update details of band memebrs along with scheduling events.
 4. The panel consists of Fan engagement section where admin can type the information to be shared with subscribers and upon sending, the information is automatically delivered to respective subscribers email id.
 
