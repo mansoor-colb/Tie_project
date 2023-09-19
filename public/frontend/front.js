@@ -1,5 +1,8 @@
 $(document).ready(function(){
     // alert("hell")
+    if(!(localStorage.getItem("userid"))){
+        window.location.href="http://localhost:1233/loginuser.html"
+    }
     let query = window.location.search;
     let url = new URLSearchParams(query);
     let val = url.get("aid");
@@ -414,9 +417,9 @@ function loadcomments(){
 }
 loadcomments()
 $(document).on("click","#mkcomment",function(){
- if(!localStorage.getItem(userid)){
+ if(!localStorage.getItem("userid")){
     if(confirm("Please login to make Comment")){
-        window.location.href="http://localhost:1233/frontend/index.html?aid=053e3aafdb577fa5aa0dfe1b3e639f4d"
+        window.location.href="http://localhost:1233/loginuser.html"
     }
  }
 let v=$("#txtcomment").val();

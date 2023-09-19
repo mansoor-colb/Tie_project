@@ -56,7 +56,7 @@
                                    
                                     <button id="signup" class="btn login-form__btn submit w-100">Sign In</button>
                                 </div>
-                                <p class="mt-5 login-form__footer">Don't have Account ?? <a href="register.html" class="text-primary"> Register </a> </p>
+                                <p class="mt-5 login-form__footer">Don't have Account ?? <a href="registeruser.html" class="text-primary"> Register </a> </p>
                               
                             </div>
                         </div>
@@ -86,7 +86,7 @@
                                     if(res.status==200){
                                         swal("Logged In Successfully")
                                         console.log(res.response)
-                                        localStorage.setItem('userid',res.response[0].user_idd)
+                                        localStorage.setItem('userid',res.response[0].user_id)
                                         setTimeout(function(){
                                             window.location.href='http://localhost:1233/frontend/index.html?aid=053e3aafdb577fa5aa0dfe1b3e639f4d'
 

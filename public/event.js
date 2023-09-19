@@ -1,5 +1,7 @@
 $(document).ready(function () {
-
+    if(!(localStorage.getItem("artistid"))){
+        window.location.href="login.html"
+    }
     $('#eventform').submit(function (e) {
         $("#Aaid").val(`${localStorage.getItem("artistid")}`) // alert(1);
          e.preventDefault(); // Prevent the default form submission

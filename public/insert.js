@@ -1,5 +1,8 @@
 $(document).ready(function () {
 
+    if(!(localStorage.getItem("artistid"))){
+        window.location.href="login.html"
+    }
 
     $('#coverform').submit(function (e) {
        $("#aid").val(`${localStorage.getItem("artistid")}`) // alert(1);

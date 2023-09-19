@@ -48,7 +48,7 @@
         
                                 <div class="mt-5 mb-5 login-input">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="artist" placeholder="Artist Name" >
+                                        <input type="text" class="form-control" id="artist" placeholder="User Name" >
                                     </div>
                                     <div class="form-group">
                                         <input type="email" class="form-control" id="email" placeholder="email" d>
@@ -72,6 +72,7 @@
 
     <script>
         $(document).ready(function(){
+            localStorage.removeItem('userid');
             $("#signup").on("click",function(){
             
                let artist= $("#artist").val()

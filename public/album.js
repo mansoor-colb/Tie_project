@@ -1,5 +1,7 @@
 $(document).ready(function () {
-
+    if(!(localStorage.getItem("artistid"))){
+        window.location.href="login.html"
+    }
 
 
 //album
