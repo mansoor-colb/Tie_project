@@ -1,8 +1,8 @@
 $(document).ready(function(){
     // alert("hell")
-    if(!(localStorage.getItem("userid"))){
-        window.location.href="http://localhost:1233/loginuser.html"
-    }
+    // if(!(localStorage.getItem("userid"))){
+    //     window.location.href="http://localhost:1233/loginuser.html"
+    // }
     let query = window.location.search;
     let url = new URLSearchParams(query);
     let val = url.get("aid");
