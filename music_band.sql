@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 16, 2023 at 12:55 PM
+-- Generation Time: Sep 20, 2023 at 06:33 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -64,7 +64,8 @@ CREATE TABLE `artists` (
 --
 
 INSERT INTO `artists` (`id`, `aid`, `artist_name`, `artist_email`, `artist_pass`) VALUES
-(7, '053e3aafdb577fa5aa0dfe1b3e639f4d', 'Mansoor', '1dt20cs077@dsatm.edu.in', '5b4f9462dedc9fcdadec1ba62372fe95');
+(7, '053e3aafdb577fa5aa0dfe1b3e639f4d', 'Mansoor', '1dt20cs075@dsatm.edu.in', '5b4f9462dedc9fcdadec1ba62372fe95'),
+(8, '699d37c734a7e0283db4c942a1210abb', 'Zain', '1dt20cs077@dsatm.edu.in', 'a62b74b2508ea645c57baad498134700');
 
 -- --------------------------------------------------------
 
@@ -85,7 +86,8 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`id`, `user_id`, `msg_id`, `user_name`, `user_msg`) VALUES
-(1, 'cfdf9144bffee36b75dc1fc247efad8f', '9080', 'Mansoor', 'THis Group Is Insane ✨✨✨');
+(1, 'cfdf9144bffee36b75dc1fc247efad8f', '9080', 'Mansoor', 'THis Group Is Insane ✨✨✨'),
+(4, '753e56816a6d39136d9799c0a98a8f83', '7648', 'Zain', 'Totally Agreed ✨✨');
 
 -- --------------------------------------------------------
 
@@ -233,7 +235,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `user_id`, `user_name`, `user_email`, `user_pass`) VALUES
-(1, 'cfdf9144bffee36b75dc1fc247efad8f', 'Mansoor', '1dt20cs077@dsatm.edu.in', 'd05563fa82c08324a1c0d0b4eb6bf518');
+(1, 'cfdf9144bffee36b75dc1fc247efad8f', 'Mansoor', '1dt20cs075@dsatm.edu.in', 'd05563fa82c08324a1c0d0b4eb6bf518'),
+(2, '753e56816a6d39136d9799c0a98a8f83', 'Zain', '1dt20cs077@dsatm.edu.in', 'a62b74b2508ea645c57baad498134700');
 
 --
 -- Indexes for dumped tables
@@ -307,13 +310,13 @@ ALTER TABLE `album`
 -- AUTO_INCREMENT for table `artists`
 --
 ALTER TABLE `artists`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `cover_info`
@@ -349,7 +352,7 @@ ALTER TABLE `track`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
