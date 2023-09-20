@@ -1,4 +1,4 @@
-# tie_project
+# Tie_project
 
 # Music Band Website with Admin Panel
 
