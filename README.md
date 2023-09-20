@@ -1,4 +1,4 @@
-# tie_project
+# Tie_project
 
 # Music Band Website with Admin Panel
 
@@ -50,7 +50,7 @@ This repository contains the codebase for a dynamic and user-friendly music band
 
 ## Getting Started
 
-## user Access
+## User Access
 
 1. Access the website as a [User] by opening your web browser and navigating to the URL(http://localhost:1233/frontend/).
 2. You as a user get to explore the website, view upcoming events, read about the band, and enjoy the music and much more. Also you can subscribe to the newzletter if not registed or loggedin, you will get an instant email confiromtion to the provided email regarding the subscription.
