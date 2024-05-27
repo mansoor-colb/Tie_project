@@ -24,8 +24,8 @@ $(document).ready(function(){
               $("#you").attr("href",`${res.response[0].youtube}`)
               $("#insta").attr("href",`${res.response[0].insta}`)
               $("#description").html(`${res.response[0].description}`)
-              $('#setcover').attr('data-setbg', `../uploads/${res.response[0].images.split(",")[2]}`)
-              $('#setcover').css('background-image', `url(../uploads/${res.response[0].images.split(",")[2]})`);
+              $('#setcover').attr('data-setbg', `../uploads/${res.response[0].images.split(",")[0]}`)
+              $('#setcover').css('background-image', `url(../uploads/${res.response[0].images.split(",")[0]})`);
             
                 
             }

@@ -218,12 +218,12 @@ app.post("/coverinsert", upload.array("images", 5), (req, res) => {
   // console.log(aid);
   let msql = `select * from cover_info where aid="${aid}"`;
   let mquery = conn.query(msql, async (err, mresult) => {
-    console.log(mresult)
+    console.log(images)
     if (mresult.length != 0) {
       let im=""
       if(images.length!=0){
         // console.log(mresult)
-         im=mresult[0].images+","+images.join(",");
+         im=images.join(",");
       }
     
       let sqlm = `UPDATE cover_info SET title='${title}' ,tag='${tag}', description='${description}' ,youtube='${youtube}' ,
