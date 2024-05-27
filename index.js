@@ -207,7 +207,7 @@ app.post("/signupuser", async (req, res) => {
 app.post("/coverinsert", upload.array("images", 5), (req, res) => {
   const {
     "val-bname": title,
-    "val-bname": tag,
+    "val-tag": tag,
     "val-suggestions": description,
     "val-insta": insta,
     "val-youtube": youtube,
@@ -218,6 +218,7 @@ app.post("/coverinsert", upload.array("images", 5), (req, res) => {
   // console.log(aid);
   let msql = `select * from cover_info where aid="${aid}"`;
   let mquery = conn.query(msql, async (err, mresult) => {
+    console.log(mresult)
     if (mresult.length != 0) {
       let im=""
       if(images.length!=0){
@@ -228,6 +229,7 @@ app.post("/coverinsert", upload.array("images", 5), (req, res) => {
       let sqlm = `UPDATE cover_info SET title='${title}' ,tag='${tag}', description='${description}' ,youtube='${youtube}' ,
             insta='${insta}',images='${im}' where aid="${aid}"`;
       let querym = conn.query(sqlm, (err, resultm) => {
+        console.log("resul",resultm)
         if (err) {
           res.send({ status: 500, error: null, response: resultm });
           throw err;
@@ -243,7 +245,7 @@ app.post("/coverinsert", upload.array("images", 5), (req, res) => {
         description: description,
         youtube: youtube,
         insta: insta,
-        images: images.join(","),
+        images: images.length!=0?images.join(","):"",
       };
       let sql = "INSERT INTO cover_info SET ?";
       let query = conn.query(sql, data, (err, result) => {
@@ -339,14 +341,21 @@ app.post("/getalbum", (req, res) => {
 });
 
 app.post("/getcover", (req, res) => {
-  let sql = `SELECT * FROM cover_info`;
+  console.log(req.body.aid)
+  let sql = `SELECT * FROM cover_info where aid="${req.body.aid}"`;
 
   let query = conn.query(sql, async (err, result) => {
-    if (result.length != 0) {
+    try{
+    if (result?.length != 0) {
       res.send(JSON.stringify({ status: 200, error: null, response: result }));
     } else {
       res.send(JSON.stringify({ status: 500, error: null, response: result }));
     }
+  }
+  catch(err){
+    console.log("err",err)
+
+  }
   });
 });
 app.post("/getalbumtrack", (req, res) => {
@@ -510,7 +519,7 @@ app.post("/getevent", (req, res) => {
 
   app.post("/getcomment", (req, res) => {
   
-    let sql = `SELECT * FROM comments`;
+    let sql = `SELECT * FROM comments where aid="${req.body.aid}"`;
   
     let query = conn.query(sql, (err, result) => {
       if (result.length != 0) {
@@ -553,6 +562,7 @@ app.post("/getevent", (req, res) => {
     msg_id:randomNumber,
     user_name:ress[0].user_name,
     user_msg:req.body.txt,
+    aid:req.body.aid
   }
     let sql = `INSERT INTO comments SET ? `;
   
@@ -709,7 +719,7 @@ app.post("/getevent", (req, res) => {
     }
   ///////front end requests
   app.post("/frontcover", (req, res) => {
-    let sql = `SELECT * FROM cover_info`;
+    let sql = `SELECT * FROM cover_info where  aid="${req.body.aid}"`
   
     let query = conn.query(sql, (err, result) => {
       if (err) {

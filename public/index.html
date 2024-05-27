@@ -122,14 +122,14 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <a target="_blank" href="http://localhost:1233/frontend/index.html?aid=053e3aafdb577fa5aa0dfe1b3e639f4d">Open website</a>
+                        <a target="_blank" href="#" id="openweb">Open website</a>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body" style="width: 100%;height: 100vh;">
-                                <iframe src="http://localhost:1233/frontend/index.html?aid=053e3aafdb577fa5aa0dfe1b3e639f4d" frameborder="0"></iframe>
+                                <iframe src="#" frameborder="0" id="iframe"></iframe>
                             </div>
                         </div>
                     </div>
@@ -194,13 +194,17 @@
     if(!(localStorage.getItem("artistid"))){
         window.location.href="login.html"
     }
+
+    document.getElementById('openweb').href = `http://localhost:1233/frontend/index.html?aid=${localStorage.getItem("artistid")}`
+    document.getElementById('iframe').src = `http://localhost:1233/frontend/index.html?aid=${localStorage.getItem("artistid")}`
+
     $("#shareweb").on("click",function(){
         
         if (navigator.share) {
         navigator.share({
             title: 'Sukuun Pulse',
             text: 'Check out this cool website!',
-            url: 'http://localhost:1233/frontend/index.html?aid=053e3aafdb577fa5aa0dfe1b3e639f4d'
+            url: `http://localhost:1233/frontend/index.html?aid=${localStorage.getItem("artistid")}`
         })
         .then(() => console.log('Share successful'))
         .catch((error) => console.error('Share failed', error));

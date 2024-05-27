@@ -56,10 +56,10 @@
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
                             <ul>
-                                <li><a href="http://localhost:1233/frontend/index.html?aid=053e3aafdb577fa5aa0dfe1b3e639f4d">Home</a></li>
-                                <li><a href="http://localhost:1233/frontend/index.html?aid=053e3aafdb577fa5aa0dfe1b3e639f4d#about">About</a></li>
-                                <li class="active"><a href="./discography.html">Discography</a></li>
-                                <li><a href="http://localhost:1233/frontend/index.html?aid=053e3aafdb577fa5aa0dfe1b3e639f4d#events">Tours</a></li>
+                                <li><a id="home-link" href="#">Home</a></li>
+        <li><a id="about-link" href="#">About</a></li>
+        <li class="active"><a id="discography-link" href="./discography.html">Discography</a></li>
+        <li><a id="tours-link" href="#">Tours</a></li>
                                
                             </ul>
                         </nav>
@@ -83,7 +83,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a href=http://localhost:1233/frontend/index.html?aid=053e3aafdb577fa5aa0dfe1b3e639f4d#disco><i class="fa fa-home"></i> Home</a>
+                        <a  id="home-link1" href="#"><i class="fa fa-home"></i> Home</a>
                         <span>Discography</span>
                     </div>
                 </div>
@@ -177,6 +177,11 @@
     <script src="js/jplayerInit.js"></script>
     <script>
         $(document).ready(function(){
+            let aid=localStorage.getItem("artistid")
+            $('#home-link').attr('href', `http://localhost:1233/frontend/index.html?aid=${aid}`);
+            $('#home-link1').attr('href', `http://localhost:1233/frontend/index.html?aid=${aid}`);
+                $('#about-link').attr('href', `http://localhost:1233/frontend/index.html?aid=${aid}#about`);
+            $('#tours-link').attr('href', `http://localhost:1233/frontend/index.html?aid=${aid}#events`);
 
             let query = window.location.search;
     let url = new URLSearchParams(query);
@@ -205,6 +210,7 @@
 let incr=1;
                 for( let track of res.response[1]){
                     if(track.album_id==val){
+                        $("#albumcont").html("")
                         $("#albumcont").append(`
 
 

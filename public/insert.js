@@ -92,7 +92,8 @@ $(document).ready(function () {
 function load(){
     var aid=localStorage.getItem("artistid");
     $.ajax({
-        url:"http://localhost:1233/getcover",
+        url:`http://localhost:1233/getcover`,
+        data:{aid},
         type:"post",
         dataType: "json",
         success: function(res){

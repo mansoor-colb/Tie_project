@@ -88,7 +88,7 @@
                                         console.log(res.response)
                                         localStorage.setItem('userid',res.response[0].user_id)
                                         setTimeout(function(){
-                                            window.location.href='http://localhost:1233/frontend/index.html?aid=053e3aafdb577fa5aa0dfe1b3e639f4d'
+                                            window.location.href=`http://localhost:1233/frontend/index.html?aid=${localStorage.getItem("artistid")}`
 
                                         
                                         },2000)

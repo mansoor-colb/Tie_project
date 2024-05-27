@@ -115,7 +115,7 @@
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
                             <ul>
-                                <li class="active"><a href="http://localhost:1233/frontend/index.html?aid=053e3aafdb577fa5aa0dfe1b3e639f4d">Home</a></li>
+                                <li class="active"><a href="#" id="openweb">Home</a></li>
                                 <li><a href="#about">About</a></li>
                                 <li><a href="#disco">Discography</a></li>
                                 <li><a href="#events">Tours</a></li>
@@ -147,7 +147,7 @@
 
     <!-- Hero Section Begin -->
     <!-- <section class="hero spad set-bg" data-setbg="img/hero-bg.png"> -->
-    <section class="hero spad set-bg" data-setbg="../uploads/images-1694855330192.jpg">
+    <section class="hero spad set-bg" data-setbg="../uploads/images-1694855330192.jpg" id="setcover">
         <!-- <section class="hero spad set-bg" data-setbg="../uploads/images-1694857269943.jpg"> -->
         <div class="container">
             <div class="row">
@@ -511,6 +511,7 @@
 
     <!-- Initialize Swiper -->
     <script>
+        document.getElementById('openweb').href = `http://localhost:1233/frontend/index.html?aid=${localStorage.getItem("artistid")}`
         function preventDefaultAction(event) {
             event.preventDefault(); // Prevents the default form submission
            

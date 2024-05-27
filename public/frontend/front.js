@@ -6,12 +6,15 @@ $(document).ready(function(){
     let query = window.location.search;
     let url = new URLSearchParams(query);
     let val = url.get("aid");
+    if(val==null || val==undefined){
+        val=localStorage.getItem("artistid")
+    }
     // alert(val)
     function loadcover(){
         $.ajax({
             type: "post",
             url: "http://localhost:1233/frontcover",
-            // data: "data",
+            data:{aid:val},
             dataType: "json",
             success: function (res) {
                 console.log(res.response)
@@ -21,6 +24,9 @@ $(document).ready(function(){
               $("#you").attr("href",`${res.response[0].youtube}`)
               $("#insta").attr("href",`${res.response[0].insta}`)
               $("#description").html(`${res.response[0].description}`)
+              $('#setcover').attr('data-setbg', `../uploads/${res.response[0].images.split(",")[2]}`)
+              $('#setcover').css('background-image', `url(../uploads/${res.response[0].images.split(",")[2]})`);
+            
                 
             }
         });
@@ -95,6 +101,7 @@ $(document).ready(function(){
 
 
                 console.log(res.response)
+                $("#discg").html("No albums added");
                 if(res.response[0].length!=0){
                     $("#discg").html("");
                 }
@@ -422,6 +429,7 @@ $(document).on("click","#mkcomment",function(){
         window.location.href="http://localhost:1233/loginuser.html"
     }
  }
+ else{
 let v=$("#txtcomment").val();
 if(v=="" ||v==null){
     alert("Please enter a valid comment");
@@ -431,7 +439,7 @@ else{
 $.ajax({
     type: "Post",
     url:"http://localhost:1233/putcomment",
-    data: {txt:v,uid:localStorage.getItem("userid")},
+    data: {txt:v,uid:localStorage.getItem("userid"),aid:localStorage.getItem("artistid")},
     dataType: "json",
     success: function (response) {
         if(response.status==200){
@@ -445,6 +453,7 @@ $.ajax({
     }
 });
 }
+ }
 })
 
 
