@@ -14,12 +14,20 @@ const mysql = require("mysql");
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
+// const conn = mysql.createConnection({
+//   multipleStatements: true,
+//   host: "localhost",
+//   user: "root",
+//   password: "",
+//   database: "music_band",
+// });
+
 const conn = mysql.createConnection({
   multipleStatements: true,
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "music_band",
+  host: "bfzmhje09xsjbkouq6xm-mysql.services.clever-cloud.com",
+  user: "utarbmw9zyecvzbt",
+  password: "vnxAd3qNPqjIVrTSFyas",
+  database: "bfzmhje09xsjbkouq6xm",
 });
 
 // connect to database
@@ -100,6 +108,7 @@ async function encrypt(text = getRandomNumber()) {
 }
 
 async function decrypt(encryptedData) {
+
   const decipher = crypto.createDecipheriv(
     "aes-256-cbc",
     Buffer.from(secretKey, "utf-8"),
@@ -107,6 +116,7 @@ async function decrypt(encryptedData) {
   );
   let decryptedData = decipher.update(encryptedData, "hex", "utf-8");
   decryptedData += decipher.final("utf-8");
+  console.log(decryptedData)
   return decryptedData;
 }
 //register
@@ -204,7 +214,7 @@ app.post("/signupuser", async (req, res) => {
 //cover insert
 // ...
 // Handle form submission via AJAX
-app.post("/coverinsert", upload.array("images", 5), (req, res) => {
+app.post("/coverinsert", upload.array("images", 1), (req, res) => {
   const {
     "val-bname": title,
     "val-tag": tag,
@@ -221,13 +231,20 @@ app.post("/coverinsert", upload.array("images", 5), (req, res) => {
     console.log(images)
     if (mresult.length != 0) {
       let im=""
+      let sqlm
       if(images.length!=0){
         // console.log(mresult)
          im=images.join(",");
+         sqlm  = `UPDATE cover_info SET title='${title}' ,tag='${tag}', description='${description}' ,youtube='${youtube}' ,
+         insta='${insta}',images='${im}' where aid="${aid}"`;
+      }
+      else{
+         sqlm = `UPDATE cover_info SET title='${title}' ,tag='${tag}', description='${description}' ,youtube='${youtube}' ,
+        insta='${insta}' where aid="${aid}"`;
+
       }
     
-      let sqlm = `UPDATE cover_info SET title='${title}' ,tag='${tag}', description='${description}' ,youtube='${youtube}' ,
-            insta='${insta}',images='${im}' where aid="${aid}"`;
+ 
       let querym = conn.query(sqlm, (err, resultm) => {
         console.log("resul",resultm)
         if (err) {
@@ -245,7 +262,7 @@ app.post("/coverinsert", upload.array("images", 5), (req, res) => {
         description: description,
         youtube: youtube,
         insta: insta,
-        images: images.length!=0?images.join(","):"",
+        images: images.length!=0?images.join(","):"images-1694855330192.jpg",
       };
       let sql = "INSERT INTO cover_info SET ?";
       let query = conn.query(sql, data, (err, result) => {

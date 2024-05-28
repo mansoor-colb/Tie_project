@@ -200,11 +200,15 @@ loadband()
         data:{aid:val},
         // dataType: "json",
         success: function(res){
+            $("#events").html("")
             if(res.status==200){
                 $("#events").html("")
                 // $("#events").append(`  
                 // `)
                 let inc=1;
+                if(res.response.length==0){
+                    $("#events").html("No tours Added")
+                }
                 
                 for(let item of res.response){
                     let arr=item.images.split(",");

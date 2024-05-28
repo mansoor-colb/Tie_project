@@ -96,6 +96,8 @@
                     <li class="nav-label"><span class="nav-text"><a href="./event.html">Events</a></span></li>
                     <li class="nav-label"><span class="nav-text"><a href="./member.html">Members</a></span></li>
                     <li class="nav-label"><span class="nav-text"><a href="./engage.html">Fan Engagement</a></span></li>
+                    <li class="nav-label"><span class="nav-text"><a href="#" onclick="signout()">Logout</a></span></li>
+
  
 
 
@@ -190,6 +192,10 @@
 
     <script src="./js/dashboard/dashboard-1.js"></script>
     <script>
+       function signout(){
+        localStorage.removeItem("artistid")
+        window.location.href="login.html"
+       }
     
     if(!(localStorage.getItem("artistid"))){
         window.location.href="login.html"
